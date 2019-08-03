@@ -1,14 +1,42 @@
 const CoToken = artifacts.require('./CoToken.sol')
-const ERC20 = artifacts.require('./ERC20.sol')
+//const ERC20 = artifacts.require('./ERC20.sol')
 
 contract("CoToken",(accounts) => {
     const tokenOwner = accounts[0]
     const testAddress = accounts[1]
   
     //Initialise total supply, sell price and buy price
-    let totalSupply = 0;
-    let sellPrice = web3.utils.toWei('1', 'ether');
-    let buyPrice = web3.utils.toWei('1', 'ether');
+    const totalSupply = 0;
+    const sellPrice = web3.utils.toWei('1', 'ether');
+    const buyPrice = web3.utils.toWei('1', 'ether');
 
-    
+    it("it should mint 10 tokens", async function () {
+        //fetch instance of contract
+        let CoTokenInstance = await CoToken.deployed()
+        //call mint function to mint 10 tokens
+        await CoTokenInstance.mint(10, { from: tokenOwner})
+        //retrieve updated balance for token owner
+        let balance = await CoTokenInstance.balanceOf(tokenOwner)
+        assert.equal(balance,10,"10 wasn't in tokenOwner")
+    })
+
+    it("it should burn 5 tokens", async function () {
+        //fetch instance of contract
+        let CoTokenInstance = await CoToken.deployed()
+        //call burn function to burn 5 tokens
+        await CoTokenInstance.burn(5, { from: tokenOwner})
+        //retrieve updated balance for token owner
+        let balance = await CoTokenInstance.balanceOf(tokenOwner)
+        assert.equal(balance,5,"5 wasn't in tokenOwner")
+    })
+
+    it("it should destroy the contract", async function () {
+
+    })
+
+
+
+
+
+
 })

@@ -36,10 +36,10 @@ contract CoToken is Ownable,ERC20 {
 
     }
 
-    function burn(uint256 value) onlyOwner public payable {
+    function burn(uint amount) onlyOwner public payable {
          require(msg.value >= sellPrice_);
-
-          totalSupply_ =  totalSupply_ - value;
+         _burn(msg.sender,amount);
+          totalSupply_ =  totalSupply_ - amount;
         // _balances[account] = _balances[account].sub(value); // should burn from all accounts
     }
 
