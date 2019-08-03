@@ -31,6 +31,11 @@ contract("CoToken",(accounts) => {
     })
 
     it("it should destroy the contract", async function () {
+        //fetch instance of contract
+        let CoTokenInstance = await CoToken.deployed()
+        await CoTokenInstance.destroy( {from: tokenOwner})
+        console.log("The contract has been destroyed")
+
 
     })
 
