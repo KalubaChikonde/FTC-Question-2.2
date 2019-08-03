@@ -11,23 +11,25 @@ import "openzeppelin-solidity/contracts/token/ERC20/ERC20.sol";
 contract CoToken is Ownable,ERC20 {
    
       uint public totalSupply_ = 0;
+      uint public buyPrice_;
+      uint public sellPrice_;
 
-    function buyPrice(uint x) public pure returns(uint) {
+    function buyPrice() public returns(uint) {
         //1 Ether is 1^18 = 1000000000000000000 Wei.
-       uint price = (10**16)*(x)+(2*10**17);
+       buyPrice_ = (10**16)*(totalSupply_)+(2*10**17);
        // uint256 price = ((1/10)*decimals)*(x) + (2/10)*decimals ;
-       return price;
+       return buyPrice_;
     }
 
-    function sellPrice(uint n) public pure returns(uint) {
+    function sellPrice() public returns(uint) {
         //1 Ether is 1^18 = 1000000000000000000 Wei.
-      uint SellPrice = (10**16)*(n)+(2*10**17);
+        sellPrice_ = (10**16)*(totalSupply_)+(2*10**17);
        // uint256 price = ((1/10)*decimals)*(x) + (2/10)*decimals ;
-       return SellPrice;
+       return sellPrice_;
     }
 
     function mint(uint amount) public payable {
-        require(msg.value >= buyPrice(amount));
+        require(msg.value >= buyPrice_);
         _mint(msg.sender,amount);
          totalSupply_ = totalSupply_ + amount;
 
@@ -35,7 +37,7 @@ contract CoToken is Ownable,ERC20 {
     }
 
     function burn(uint256 value) onlyOwner public payable {
-         require(msg.value >= sellPrice(value));
+         require(msg.value >= sellPrice_);
 
           totalSupply_ =  totalSupply_ - value;
         // _balances[account] = _balances[account].sub(value); // should burn from all accounts
