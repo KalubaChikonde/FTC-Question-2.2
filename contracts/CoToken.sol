@@ -1,14 +1,16 @@
 pragma solidity >=0.4.17 <0.6.0;
 
-// import "github.com/OpenZeppelin/zeppelin-solidity/contracts/ownership/Ownable.sol";
+//
+//import "github.com/OpenZeppelin/zeppelin-solidity/contracts/ownership/Ownable.sol";
+   //import "github.com/OpenZeppelin/zeppelin-solidity/contracts/token/ERC20/ERC20.sol";
 import "openzeppelin-solidity/contracts/ownership/Ownable.sol";
 import "openzeppelin-solidity/contracts/token/ERC20/ERC20.sol";
 
 //import "installed_contracts/zeppelin/contracts/math/Ownable.sol";
 
 contract CoToken is Ownable,ERC20 {
-     uint256 constant public decimals = 10**18;
-      uint public _totalSupply;
+   
+      uint public totalSupply_ = 0;
 
     function buyPrice(uint x) public pure returns(uint) {
         //1 Ether is 1^18 = 1000000000000000000 Wei.
@@ -27,7 +29,7 @@ contract CoToken is Ownable,ERC20 {
     function mint(uint amount) public payable {
         require(msg.value >= buyPrice(amount));
         _mint(msg.sender,amount);
-        //_totalSupply = _tokenSupply + amount;
+         totalSupply_ = totalSupply_ + amount;
 
 
     }
@@ -35,7 +37,7 @@ contract CoToken is Ownable,ERC20 {
     function burn(uint256 value) onlyOwner public payable {
          require(msg.value >= sellPrice(value));
 
-        _totalSupply = _totalSupply - value;
+          totalSupply_ =  totalSupply_ - value;
         // _balances[account] = _balances[account].sub(value); // should burn from all accounts
     }
 
