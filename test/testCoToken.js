@@ -20,14 +20,14 @@ contract("CoToken",(accounts) => {
         assert.equal(balance,10,"10 wasn't in tokenOwner")
     })
 
-    it("it should burn 5 tokens", async function () {
+    it("it should burn 4 tokens", async function () {
         //fetch instance of contract
         let CoTokenInstance = await CoToken.deployed()
         //call burn function to burn 5 tokens
-        await CoTokenInstance.burn(5, { from: tokenOwner})
+        await CoTokenInstance.burn(4, { from: tokenOwner})
         //retrieve updated balance for token owner
         let balance = await CoTokenInstance.balanceOf(tokenOwner)
-        assert.equal(balance,5,"5 wasn't in tokenOwner")
+        assert.equal(balance,6,"6 wasn't in tokenOwner")
     })
 
     it("it should destroy the contract", async function () {
