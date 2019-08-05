@@ -22,9 +22,7 @@ contract CoToken is Ownable,ERC20 {
     function buyPrice(uint256 _tokens) public returns(uint) {
         //1 Ether is 1^18 = 1000000000000000000 Wei.
        uint upperBound = totalSupply_ + _tokens;
-      // buyPrice_  = ((5*(10**15))*(_tokens)*(_tokens)) + ((2*10**17)*(_tokens)); 
-       //buyPrice_ = ((upperBound * 10**16)**2) + (upperBound  * 2*10**17) - poolBalance();
-           buyPrice_ = ((5*(10**15))*(upperBound)*(upperBound)) + ((2*10**17)*(upperBound)) - poolBalance();
+           buyPrice_ = ((5*(10**15))*(upperBound)*(upperBound)) + ((2*10**17)*(upperBound)) - poolBalance(); //integral function
       
        return buyPrice_;
     }
