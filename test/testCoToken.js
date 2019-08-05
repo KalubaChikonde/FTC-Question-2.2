@@ -8,7 +8,7 @@ contract("CoToken",(accounts) => {
     //Initialise total supply, sell price and buy price
     const totalSupply = 0;
     const mintTokens = 3;
-    const burnTokens = 2;
+    const burnTokens = 2; 
     const sellPrice = web3.utils.toWei('1', 'ether');
     const buyPrice = web3.utils.toWei('20', 'ether');
 
