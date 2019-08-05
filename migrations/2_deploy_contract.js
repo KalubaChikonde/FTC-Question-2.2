@@ -1,5 +1,5 @@
-var CoToken = artifacts.require('./CoToken.sol')
+const CoToken = artifacts.require("./CoToken.sol");
 
-module.exports = function (deployer) {
-  deployer.deploy(CoToken)
-}
+module.exports = function(deployer) {
+  deployer.deploy(CoToken);
+};
